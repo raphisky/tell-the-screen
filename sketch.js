@@ -5,7 +5,7 @@ var backgroundColor;
 function preload() {
   var fonts = ['./fonts/VeraBd.ttf','./fonts/luxirri.ttf'];
   luxirri = loadFont('./fonts/luxirri.ttf');
-  font = loadFont('./fonts/VeraIt.ttf');
+  font = loadFont('./fonts/VeraBd.ttf');
   comicate = loadFont('./fonts/COMICATE.ttf');
   luxirb =   loadFont('./fonts/luxirb.ttf');
 }
@@ -26,8 +26,8 @@ var playerContainer, player, preview;
 var myPreview = document.getElementById("myPreview");
 
 // SPEECH REC
-var language = 'FR-fr';
-var myRec = new p5.SpeechRec('FR-fr',parseSpeechResults); // new P5.SpeechRec object
+var speechLanguage = 'FR-fr';
+var myRec = new p5.SpeechRec(speechLanguage,parseSpeechResults); // new P5.SpeechRec object
 myRec.continuous = true; // do continuous recognition
 myRec.interimResults = true; // allow partial recognition (faster, less accurate)
 
@@ -66,11 +66,13 @@ function setup() {
   player.hide('');
 
   // Controls
-  recordButton = createDiv('PRESS TO RECORD');
+  recordButton = createDiv('HOLD TO RECORD');
   recordButton.id('record-button');
   recordButton.position(windowWidth / 2, windowHeight - 150);
   recordButton.mouseClicked(audioRecording);
   recordButton.hide();
+
+
 
   // Input
   inp = createInput(myText);
@@ -112,6 +114,12 @@ function processSoundData() {
   vol = mic.getLevel();
   mappedVol = map(vol, 0, 1, 0, 40);
 
+  // Get spectrum
+  spectrum = fft.analyze();
+  for (i = 0; i < spectrum.length; i++) {
+    var mappedSpectrum = map(spectrum[i], 0, spectrum.length, 0,255);
+    console.log(mappedSpectrum[i]);
+  }
   // Get speech
 
 }
@@ -125,20 +133,22 @@ var textBlueColor;
 function drawText() {
   if (myRec.resultValue) {
     parseSpeechResults();
-    points = font.textToPoints(spokenWords.toUpperCase(),100,300,60 + mappedVol * 50 );
+    points = font.textToPoints(spokenWords.toUpperCase(),100,windowHeight/2,100 + mappedVol * 5 );
   }
   else {
-    points = font.textToPoints(myText,100,windowHeight/2,80 + mappedVol * 50 );
+    points = font.textToPoints(myText,100,windowHeight/2,100 + mappedVol * 5 );
   }
   beginShape();
   for (var i = 0; i < points.length; i++) {
     var pt = points[i];
-    randomColor = color(random(255),random(255),random(255));
-    fill(randomColor);
-    stroke(255,255,255);
-    strokeWeight(3+mappedVol/10);
+    // colorText();
+    sinColor = color(((sin(millis()/1000)+ 1)/2)*255, ((sin(millis()/2000)+ 1)/2)*255, ((sin(millis()/1500)+ 1)/2)*255);
+    stroke(sinColor);
+    strokeWeight(3 + mappedVol/10);
     vertex(pt.x, pt.y);
+    fill(backgroundColor);
   }
+  randomColor = color(random(255),random(255),random(255));
   endShape();
 }
 
