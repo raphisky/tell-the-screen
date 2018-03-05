@@ -1,0 +1,48 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Helvetica, Arial;
+}
+
+#canvas-container {
+  position: relative;
+  margin: auto;
+}
+
+#controls {
+  display: block;
+}
+
+#record-button {
+  width: 300px;
+  font-weight: 800;
+  font-size: 24px;
+  cursor: pointer;
+  display: inline-block;
+  border: 2px solid black;
+  padding: 15px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+
+#record-button:active {
+  background-color: black;
+  color: #FFFFFF;
+  transition: background 1s linear;
+}
+
+#playerContainer {
+  border: 1px solid black;
+  width: 480px;
+  height: 270px;
+
+}
+
+#myInput:focus {
+  outline: none;
+}
+
+#myInput {
+  color: #FFFFFF;
+}
