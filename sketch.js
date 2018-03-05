@@ -69,6 +69,8 @@ function setup() {
   recordButton.mouseClicked(audioRecording);
   recordButton.hide();
 
+  // LANGUAGE
+
   // Input
   inp = createInput(myText);
   inp.input(myInputEvent);
