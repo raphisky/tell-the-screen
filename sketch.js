@@ -6,6 +6,8 @@ function preload() {
   var fonts = ['./fonts/VeraBd.ttf','./fonts/luxirri.ttf'];
   luxirri = loadFont('./fonts/luxirri.ttf');
   font = loadFont('./fonts/VeraIt.ttf');
+  comicate = loadFont('./fonts/COMICATE.ttf');
+  luxirb =   loadFont('./fonts/luxirb.ttf');
 }
 
 function chooseFont() {
@@ -24,6 +26,7 @@ var playerContainer, player, preview;
 var myPreview = document.getElementById("myPreview");
 
 // SPEECH REC
+var language = 'FR-fr';
 var myRec = new p5.SpeechRec('FR-fr',parseSpeechResults); // new P5.SpeechRec object
 myRec.continuous = true; // do continuous recognition
 myRec.interimResults = true; // allow partial recognition (faster, less accurate)
@@ -122,10 +125,10 @@ var textBlueColor;
 function drawText() {
   if (myRec.resultValue) {
     parseSpeechResults();
-    points = font.textToPoints(spokenWords.toUpperCase(),100,300,80 + mappedVol * 50 );
+    points = font.textToPoints(spokenWords.toUpperCase(),100,300,60 + mappedVol * 50 );
   }
   else {
-    points = font.textToPoints(myText,100,windowHeight/2 - 100,80 + mappedVol * 50 );
+    points = font.textToPoints(myText,100,windowHeight/2,80 + mappedVol * 50 );
   }
   beginShape();
   for (var i = 0; i < points.length; i++) {
