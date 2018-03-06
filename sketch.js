@@ -18,8 +18,9 @@ function chooseFont() {
 
 // TEXT
 var inp;
-var myText = "TALK TO YOUR SCREEN";
+var myText = "You can type too";
 var points;
+var inputPlaceholder = "You can write, too";
 
 // PLAYER
 var playerContainer, player, preview;
@@ -72,21 +73,14 @@ function setup() {
   recordButton.mouseClicked(audioRecording);
   recordButton.hide();
 
-<<<<<<< HEAD
-  // LANGUAGE
-=======
-
->>>>>>> master
-
   // Input
   inp = createInput(myText);
   inp.input(myInputEvent);
   inp.elt.focus();
-  inp.position(0,0)
   inp.id('myInput');
   inp.elt.focus();
-  inp.attribute('maxlength','15');
-  inp.hide();
+  // inp.attribute('maxlength','15');
+  // inp.hide();
 
   // create an audio in
   mic = new p5.AudioIn();
@@ -137,10 +131,10 @@ var textBlueColor;
 function drawText() {
   if (myRec.resultValue) {
     parseSpeechResults();
-    points = font.textToPoints(spokenWords.toUpperCase(),100,windowHeight/2,100 + mappedVol * 5 );
+    points = font.textToPoints(spokenWords.toUpperCase(),120,windowHeight/2,150 + mappedVol * 5 );
   }
   else {
-    points = font.textToPoints(myText,100,windowHeight/2,100 + mappedVol * 5 );
+    points = font.textToPoints("TALK TO YOUR SCREEN",100,windowHeight/2,80 + mappedVol * 5 );
   }
   beginShape();
   for (var i = 0; i < points.length; i++) {
@@ -156,6 +150,12 @@ function drawText() {
   endShape();
 }
 
+var inputText;
+function drawTextFromInput(){
+  textFont(font);
+  text(myText, 50,50,windowWidth-100,windowHeight-100);
+  textSize(42);
+}
 
 var myCanvas;
 
@@ -170,6 +170,7 @@ function draw() {
   background(backgroundColor);
   processSoundData();
   drawText();
+  drawTextFromInput();
   noStroke();
   inp.elt.focus();
 }
