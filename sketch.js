@@ -6,7 +6,7 @@ function preload() {
   var fonts = ['./fonts/VeraBd.ttf','./fonts/luxirri.ttf'];
   luxirri = loadFont('./fonts/luxirri.ttf');
   font = loadFont('./fonts/VeraBd.ttf');
-  comicate = loadFont('./fonts/COMICATE.ttf');
+  // comicate = loadFont('./fonts/COMICATE.ttf');
   luxirb =   loadFont('./fonts/luxirb.ttf');
 }
 
